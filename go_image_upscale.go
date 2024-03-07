@@ -114,7 +114,7 @@ func main() {
 	r, _ := os.Open("./lil_gopher.png")
 	img, _ := png.Decode(r)
 
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 5; i++ {
 		img = image2X(img)
 	}
 
