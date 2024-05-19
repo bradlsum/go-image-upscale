@@ -1,3 +1,3 @@
-module github.com/bradlsum/go-image-upscale
+module github.com/bradlsum/gscale
 
 go 1.22.0

@@ -1,1 +1,1 @@
-# go-image-upscale
+# gscale
