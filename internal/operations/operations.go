@@ -26,13 +26,13 @@ func IntegerScale(img image.Image, scale int) *image.NRGBA {
 }
 
 type Coords struct {
-	x int
-	y int
-	c color.Color
+	X int
+	Y int
+	C color.Color
 }
 
 func (c Coords) toString() string {
-	return strconv.Itoa(c.x) + "," + strconv.Itoa(c.y)
+	return strconv.Itoa(c.X) + "," + strconv.Itoa(c.Y)
 }
 
 func Image2X(img image.Image) *image.NRGBA {
@@ -44,28 +44,28 @@ func Image2X(img image.Image) *image.NRGBA {
 		for y := 0; y < y_max; y++ {
 			c := img.At(x, y)
 			newImg.Set(x*scale, y*scale, c)
-			coord := Coords{x: x * scale, y: y * scale}
+			coord := Coords{X: x * scale, Y: y * scale}
 			visited[coord.toString()] = true
 		}
 	}
 	for x := 0; x < x_max; x++ {
 		for y := 0; y < y_max; y++ {
-			coord := Coords{x: x, y: y}
+			coord := Coords{X: x, Y: y}
 			go func() {
-				c := findNearestColor(newImg, coord, scale, visited)
-				newImg.Set(c.x, c.y, c.c)
+				c := FindNearestColor(newImg, coord, scale, visited)
+				newImg.Set(c.X, c.Y, c.C)
 			}()
 		}
 	}
 	return newImg
 }
 
-func findNearestColor(img *image.NRGBA, coord Coords, scale int, visited map[string]bool) Coords {
+func FindNearestColor(img *image.NRGBA, coord Coords, scale int, visited map[string]bool) Coords {
 	sample := make(map[color.Color]int)
 	ratio := scale / 2
-	for i := coord.x - ratio; i < coord.x+ratio; i++ {
-		for j := coord.y - ratio; j < coord.y+ratio; j++ {
-			coord := Coords{x: i, y: j}
+	for i := coord.X - ratio; i < coord.X+ratio; i++ {
+		for j := coord.Y - ratio; j < coord.Y+ratio; j++ {
+			coord := Coords{X: i, Y: j}
 			v, ok := visited[coord.toString()]
 			if ok && v {
 				c := img.At(i, j)
@@ -86,5 +86,5 @@ func findNearestColor(img *image.NRGBA, coord Coords, scale int, visited map[str
 			count = v
 		}
 	}
-	return Coords{x: coord.x, y: coord.y, c: choice}
+	return Coords{X: coord.X, Y: coord.Y, C: choice}
 }
