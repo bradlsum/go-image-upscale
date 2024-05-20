@@ -2,7 +2,7 @@ package operations_test
 
 import "testing"
 
-func TestIngegerScale(t *testing.T) {
+func TestIntegerScale(t *testing.T) {
 
 }
 

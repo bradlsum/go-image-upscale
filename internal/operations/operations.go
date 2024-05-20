@@ -11,6 +11,8 @@ const (
 	Scale   = "scale2x"
 )
 
+var Operations = []string{Image2x, Scale}
+
 func IntegerScale(img image.Image, scale int) *image.NRGBA {
 	x_max, y_max := img.Bounds().Max.X*scale, img.Bounds().Max.Y*scale
 	newImg := image.NewNRGBA(image.Rect(0, 0, x_max, y_max))
